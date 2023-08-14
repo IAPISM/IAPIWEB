@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAPI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+    body {
+      background-image: url('rosadia.jpg');
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #000;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .title {
+      color: #ffcc33;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      letter-spacing: 2px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .sub-title {
+      color: silver;
+      font-family: 'Playfair Display', serif;
+      font-size: 28.8px;
+      letter-spacing: 2px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .text-box {
+      width: 100%;
+      background-color: transparent;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start;
+      box-sizing: border-box;
+      margin-left: 0;
+    }
+
+    .text {
+      color: white;
+      font-size: 18px;
+    }
+ .result-box {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      margin-top: 20px;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    .result-text {
+      color: #000;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+   <div class="container">
+    <h1 class="title">IAPI</h1>
+    <h2 class="sub-title">Resultados</h2>
+    <div class="result-box" id="results"> <!-- Agrega el id "results" aquí -->
+      <div class="result-text">Cargando resultados...</div>
+    </div>
+  </div>
+ <script>
+    // Agrega aquí tu clave de API de Google Sheets
+    const apiKey = 'AIzaSyBVGKBMbCYuVioU59J-b12LDMNK8MZu7co';
+
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/1XxQ9u_XM2YWoRxWFt1AS7XD_z_uLcCdK5DX4kK0GKdM/values/Resultados?key=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        const resultsContainer = document.getElementById("results");
+        const result = data.values[1][0]; // Obtener el resultado de la celda A2
+        
+        const resultElement = document.createElement("div");
+        resultElement.classList.add("result-text");
+        resultElement.textContent = result;
+        resultsContainer.innerHTML = "";
+        resultsContainer.appendChild(resultElement);
+      })
+      .catch(error => {
+        console.error("Error al cargar los resultados:", error);
+        const resultsContainer = document.getElementById("results");
+        resultsContainer.innerHTML = '<div class="result-text">Error al cargar los resultados. Inténtalo de nuevo más tarde.</div>';
+      });
+  </script>
+</body>
+</html>

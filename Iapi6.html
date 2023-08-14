@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IAPI - Instrumento Ajuste Psicoterapia Ideal</title>
+  <title>I A P I - Instrumento Ajuste Psicoterapia Ideal</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
     body {
       background-image: url('background of a web page.jpg');
@@ -13,7 +13,7 @@
       background-size: cover;
       background-position: center;
 
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       color: #000;
       line-height: 1.6;
       margin: 0;
@@ -64,7 +64,7 @@
     }
 
     .title {
-      font-size: 28px;
+      font-size: 30px;
     }
 
     .subtitle {
@@ -77,6 +77,7 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-align: center; /* Centra el contenido */
     }
 
     form {
@@ -85,6 +86,7 @@
 
     .question {
       margin-bottom: 20px;
+      text-align: center; /* Centra las preguntas */
     }
 
     label {
@@ -95,13 +97,13 @@
       font-weight: bold;
     }
 
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      resize: vertical;
-    }
+  textarea {
+  width: calc(100% - 20px); /* Ajusta el ancho del textarea */
+  padding: 5px; /* Ajusta el espacio interno */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; /* Desactiva la redimensión vertical */
+}
 
     .btn-send {
       padding: 10px 20px;
@@ -116,8 +118,41 @@
     }
 
     .note {
-      font-style: italic;
+      font-size: 14px; /* Tamaño de fuente similar al cuadro flotante */
       text-align: center;
+      margin-top: 10px; /* Ajusta el espacio superior */
+    }
+
+    /* Estilos para los cuadros de texto flotantes */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      padding: 5px;
+      font-size: 12px; /* Tamaño de fuente reducido */
+      line-height: 1.4;
+      background-color: #555;
+      color: #fff;
+      text-align: left;
+      border-radius: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 50px); /* Ajusta el ancho del cuadro de respuestas */
+}
     }
   </style>
 </head>
@@ -135,22 +170,58 @@
     <main>
       <form id="iapi-form">
         <div class="question">
-          <label for="q1"><span class="question-number">I.</span>  ¿Quién eres?</label>
-          <textarea id="q1" name="q1" rows="4" cols="50" placeholder=""></textarea>
+          <label for="q1"><span class="question-number">I.</span> Tu identidad</label>
+          <div class="tooltip">
+            <textarea id="q1" name="q1" rows="2" cols="50" placeholder=""></textarea> <!-- Ajusta rows a 1 para una línea -->
+            <span class="tooltiptext">
+              Háblame de ti:<br>
+              - Describe quién eres<br>
+              - Tu personalidad<br>
+              - Tus valores, virtudes, fortalezas y debilidades<br>
+              - Intenta describir tu mundo interno<br>
+              - Tus intereses o formas de ver el mundo<br>
+              - Explica quién eres, necesito imaginarte y tener contexto :)
+            </span>
+          </div>
         </div>
         <div class="question">
-          <label for="q2"><span class="question-number">II.</span>  ¿Qué te trae por acá?</label>
-          <textarea id="q2" name="q2" rows="4" cols="50" placeholder=""></textarea>
+          <label for="q2"><span class="question-number">II.</span> Tu motivación</label>
+          <div class="tooltip">
+            <textarea id="q2" name="q2" rows="2" cols="50" placeholder=""></textarea> <!-- Ajusta rows a 1 para una línea -->
+            <span class="tooltiptext">
+              Háblame de tu motivo de consulta:<br>
+              - Explícame lo que motiva a buscar psicoterapia<br>
+              - Síntomas, signos o aspectos de tu salud mental que deseas mejorar<br>
+              - Cuéntame cómo crees que se originó todo, hace cuánto tiempo y por qué crees que pasa<br>
+              - ¿Qué has intentado hacer para resolver esto?<br>
+              - Por favor explícame muy bien todo lo que consideres importante.
+            </span>
+          </div>
         </div>
         <div class="question">
-          <label for="q3"><span class="question-number">III.</span>  ¿Qué deseas?</label>
-          <textarea id="q3" name="q3" rows="4" cols="50" placeholder=""></textarea>
+          <label for="q3"><span class="question-number">III.</span> Tus metas</label>
+          <div class="tooltip">
+            <textarea id="q3" name="q3" rows="2" cols="50" placeholder=""></textarea> <!-- Ajusta rows a 1 para una línea -->
+            <span class="tooltiptext">
+              ¿Qué deseas trabajar en psicoterapia?<br>
+              ¿Cómo te imaginas una psicoterapia ideal para ti?<br>
+              ¿Qué aspectos o características son importantes?<br>
+              ¿Cómo te sentirías más cómodo(a) en este proceso?<br>
+              ¿Preferirías algo práctico y acotado o algo más reflexivo pero que abarque más?<br>
+              Señala todo lo que creas relevante para buscar lo que se acomode a ti.
+            </span>
+          </div>
         </div>
         <button type="submit" class="btn-send">Consultar</button>
       </form>
-      <p class="note">*Respuestas extensas y con más detalles me ayudan a entender y a entregar una mejor sugerencia. Sé sincero (a) y tómate tu tiempo. 
-                      No ingreses datos personales, sólo describe lo mejor posible tu forma de ser, tu situación, contexto y deseos.   
-                      :).</p>
+      <p class="note">
+        <span style="font-style: normal; font-size: 14px;">
+          *Respuestas extensas y con más detalles me ayudan a entender y a entregar una mejor sugerencia, no hay un limite máximo de palabras. 
+           Sé sincero(a) y tómate tu tiempo.
+          No ingreses datos personales, sólo describe lo mejor posible tu forma de ser, tu situación, contexto y deseos.
+            =)
+        </span>
+      </p>
     </main>
   </div>
   <script>
@@ -189,6 +260,6 @@
       });
     }); // Cierre de la función addEventListener
   </script>
-<script src="google-sheets-interaction.js"></script>
+  <script src="google-sheets-interaction.js"></script>
 </body>
-
+</html>

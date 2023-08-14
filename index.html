@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAPI - Instrumento Ajuste Psicoterapia Ideal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+
+    body {
+      background-image: url('background of a web page.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      font-family: 'Segoe UI', sans-serif;
+      color: #000;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .weather-icons {
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .weather-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .weather-icon.sun {
+      color: orange;
+    }
+
+    .weather-icon.moon {
+      color: #fff;
+    }
+
+    .weather-icon.info {
+      color: purple;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title,
+    .subtitle {
+      color: gold;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: 28px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    main {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      margin-bottom: 30px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+    }
+
+    .question-number {
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+
+    .btn-send {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #00ff00;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .note {
+      font-style: italic;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="weather-icons">
+      <div class="weather-icon sun" onclick="changeBackground('Fondo1.PNG')">☀️</div>
+      <div class="weather-icon moon" onclick="changeBackground('Fondo2.PNG')">🌙</div>
+      <div class="weather-icon info" onclick="openMoreInfoPage()">ℹ️</div>
+    </div>
+    <header>
+      <h1 class="title">IAPI</h1>
+      <h2 class="subtitle">Instrumento de ajuste a la psicoterapia ideal</h2>
+    </header>
+    <main>
+      <form id="iapi-form">
+        <div class="question">
+          <label for="q1"><span class="question-number">I.</span>  ¿Quién eres?</label>
+          <textarea id="q1" name="q1" rows="4" cols="50" placeholder=""></textarea>
+        </div>
+        <div class="question">
+          <label for="q2"><span class="question-number">II.</span>  ¿Qué te trae por acá?</label>
+          <textarea id="q2" name="q2" rows="4" cols="50" placeholder=""></textarea>
+        </div>
+        <div class="question">
+          <label for="q3"><span class="question-number">III.</span>  ¿Qué deseas?</label>
+          <textarea id="q3" name="q3" rows="4" cols="50" placeholder=""></textarea>
+        </div>
+        <button type="submit" class="btn-send">Consultar</button>
+      </form>
+      <p class="note">*Respuestas extensas y con más detalles me ayudan a entender y a entregar una mejor sugerencia. Sé sincero (a) y tómate tu tiempo. 
+                      No ingreses datos personales, sólo describe lo mejor posible tu forma de ser, tu situación, contexto y deseos.   
+                      :).</p>
+    </main>
+  </div>
+  <script>
+    function changeBackground(imageName) {
+      document.body.style.backgroundImage = `url('${imageName}')`;
+    }
+
+    function openMoreInfoPage() {
+      window.location.href = 'Más Información.html';
+    }
+
+    document.getElementById("iapi-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var formData = {
+        q1: document.getElementById('q1').value,
+        q2: document.getElementById('q2').value,
+        q3: document.getElementById('q3').value
+      };
+
+      var jsonData = JSON.stringify(formData);
+
+      fetch("https://script.google.com/macros/s/AKfycbxh75YUFg1fr61JsL64NRh5fIudjRBp8RWsn7KqYALKCf7pJWFj9BppVE0TtFfeZjMrVg/exec", {
+        method: "POST",
+        body: jsonData
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        alert("Datos guardados correctamente");
+        window.location.href = 'Sugerencias.html';
+      })
+      .catch(error => {
+        console.error("Error al enviar los datos:", error);
+        alert("Error al enviar los datos. Inténtalo de nuevo más tarde.");
+      });
+    }); // Cierre de la función addEventListener
+  </script>
+<script src="google-sheets-interaction.js"></script>
+</body>
